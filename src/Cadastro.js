@@ -64,7 +64,7 @@ export default class Cadastro extends Component {
         <TextInput style={styles.input} onChangeText={(email) => this.setState({ email })} />
 
         <Text style={styles.txtInput}>Senha</Text>
-        <TextInput style={styles.input} onChangeText={(senha) => this.setState({ senha })} />
+        <TextInput secureTextEntry={true} style={styles.input} onChangeText={(senha) => this.setState({ senha })} />
 
         <TouchableOpacity style={styles.btn} onPress={this.enviar}>
           <Text style={styles.txtBtn}>Enviar</Text>

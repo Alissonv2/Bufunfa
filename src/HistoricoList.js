@@ -5,8 +5,9 @@ export default class HistoricoList extends Component {
     constructor(props) {
         super(props);
 
-        let bg = '#38ef7d'
+        let bg = '#02a31a'
 
+        //alterando a cor do registro
         if (this.props.data.tipo == 'despesa') {
             bg = '#ef473a'
         }
@@ -26,9 +27,9 @@ export default class HistoricoList extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={[styles.detalhes, { backgroundColor: this.state.bg }]} onPress={this.alerta} >
-                    <Text style={styles.texto}>  {this.props.data.tipo} </Text>
-                    <Text style={styles.texto}> R$ {this.props.data.valor} </Text>
+                <TouchableOpacity style={styles.detalhes} onPress={this.alerta} >
+                    <Text style={[styles.texto, { color: this.state.bg }]}>  {this.props.data.tipo} </Text>
+                    <Text style={[styles.texto, { color: this.state.bg }]}> R$ {this.props.data.valor} </Text>
                 </TouchableOpacity>
             </View>
         )
@@ -46,13 +47,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: '#ccc',
         paddingTop: 5,
-        margin: 5
+        margin: 5,
+        borderBottomWidth: 2,
+        borderRadius: 10
     },
 
     texto: {
-        fontSize: 22,
-        color: '#292929'
+        fontSize: 22
     }
 })

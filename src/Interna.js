@@ -24,7 +24,7 @@ export default class Interna extends Component {
     this.state = {
       saldo: 0,
       hist: [],
-      bgSaldo: '#0093a3'
+      bgSaldo: '#fff'
     };
 
     this.receita = this.receita.bind(this);
@@ -44,13 +44,13 @@ export default class Interna extends Component {
           if (state.saldo < 0) {
             state.bgSaldo = '#ef473a'
           } else {
-            state.bgSaldo = '#0093a3'
+            state.bgSaldo = '#fff'
           }
 
           this.setState(state);
         });
 
-        //ollheiro do histórico
+        //olheiro do histórico
         firebase.database().ref('historico').child(uid).on('value', (snapshot) => {
           let state = this.state;
           state.hist = [];
@@ -63,7 +63,7 @@ export default class Interna extends Component {
               descricao: childItem.val().descricao
             });
           });
-          //atualizando a prop hist
+          //atualizando a state 'hist'
           state.hist.reverse();
           this.setState(state);
         });
@@ -81,45 +81,46 @@ export default class Interna extends Component {
     this.props.navigation.navigate('Despesas');
   }
 
-  logout(){
-      alert('Deslogado com sucesso!');
+  logout() {
+    alert('Deslogado com sucesso!');
 
-      firebase.auth().signOut();
+    firebase.auth().signOut();
 
-      this.props.navigation.dispatch(StackActions.reset({
-        index: 0,
-        actions: [
-            NavigationActions.navigate({ routeName: 'Home' })
-        ]
+    this.props.navigation.dispatch(StackActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home' })
+      ]
     }));
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={[styles.areaSaldo, { backgroundColor: this.state.bgSaldo }]}>
+
+        <View style={styles.areaSaldo}>
 
           <View style={styles.logout}>
             <TouchableOpacity onPress={this.logout}>
-              <Image source={require('../assets/img/sair.png')} style={{width: 25, height: 25, marginLeft: 7}} />
+              <Image source={require('../assets/img/sair.png')} style={{ width: 25, height: 30, marginLeft: 7 }} />
             </TouchableOpacity>
           </View>
 
-          <Text style={styles.saldo}>Saldo: R$ {this.state.saldo.toFixed(2)}</Text>
+          <Text style={[styles.saldo, { color: this.state.bgSaldo }]}>Saldo: R$ {this.state.saldo.toFixed(2)}</Text>
+
+          <View style={styles.btnArea}>
+
+            <TouchableOpacity style={styles.btn} onPress={this.receita}>
+              <Text style={styles.txtBtn} >+ Receita</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[styles.btn, { borderColor: 'red' }]} onPress={this.despesas}>
+              <Text style={styles.txtBtn} >+ Despesas</Text>
+            </TouchableOpacity>
+
+          </View>
+
         </View>
-
-        <View style={styles.btnArea}>
-
-          <TouchableOpacity onPress={this.receita}>
-            <Text style={styles.txtBtn} >+ Receita</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={this.despesas}>
-            <Text style={styles.txtBtn} >+ Despesas</Text>
-          </TouchableOpacity>
-
-        </View>
-
 
         <FlatList
           style={styles.hist}
@@ -140,29 +141,38 @@ const styles = StyleSheet.create({
   areaSaldo: {
     paddingTop: 20,
     paddingBottom: 20,
+    backgroundColor: '#02a31a'
   },
-  logout:{
+  logout: {
     height: 40,
     width: 40
   },
   saldo: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#292929',
+    color: '#fff',
     textAlign: 'center'
   },
   btnArea: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#ffbf00',
-    paddingBottom: 10,
-    paddingTop: 10,
-    marginTop: 1
+    marginTop: 20,
+    borderRadius: 25
   },
+
+  btn: {
+    borderWidth: 2,
+    borderColor: '#fff',
+    borderRadius: 30,
+    height: 40,
+    width: 130,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   txtBtn: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#292929'
+    fontSize: 18,
+    color: '#fff'
   },
   hist: {
     flex: 1

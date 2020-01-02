@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TextInput ,TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import firebase from './Firebase';
 
 export default class Receita extends Component {
@@ -7,9 +7,9 @@ export default class Receita extends Component {
     static navigationOptions = {
         title: 'Adicionar Receita',
         headerStyle: {
-            backgroundColor: '#0093a3',
-          },
-          headerTintColor: '#fff'
+            backgroundColor: '#02a31a',
+        },
+        headerTintColor: '#fff'
     };
 
     constructor(props) {
@@ -22,8 +22,8 @@ export default class Receita extends Component {
         this.adicionar = this.adicionar.bind(this);
     }
 
-    adicionar(){
-        if (this.state.valor != ''){
+    adicionar() {
+        if (this.state.valor != '') {
 
             //pegando uid do user logado
             let uid = firebase.auth().currentUser.uid;
@@ -40,44 +40,44 @@ export default class Receita extends Component {
             });
 
             //atualizar o saldo
-           let user = firebase.database().ref('users').child(uid);
+            let user = firebase.database().ref('users').child(uid);
 
-           //adicionar algo ao saldo usando once()
-           //passando o snapshot
-           user.once('value').then((snapshot)=>{
+            //adicionar algo ao saldo usando once()
+            //passando o snapshot
+            user.once('value').then((snapshot) => {
 
-               //pegando o saldo e colocando na variável e somando com a state 'valor'
-               let saldo = parseFloat(snapshot.val().saldo);
-                saldo+= parseFloat(this.state.valor);
+                //pegando o saldo e colocando na variável e somando com a state 'valor'
+                let saldo = parseFloat(snapshot.val().saldo);
+                saldo += parseFloat(this.state.valor);
 
                 //passando para o banco
                 user.set({
-                    saldo:saldo
+                    saldo: saldo
                 });
-           });
+            });
 
-           this.props.navigation.goBack();
+            this.props.navigation.goBack();
         }
     }
 
     render() {
         return (
             <View style={styles.container}>
-                
-                <TextInput 
-                        style={styles.input}
-                        keyboardType="numeric"
-                        autoFocus={true}
-                        value={this.state.valor}
-                        onChangeText={ (valor) => this.setState({valor}) }
-                        placeholder="Valor da receita"
+
+                <TextInput
+                    style={styles.input}
+                    keyboardType="numeric"
+                    autoFocus={true}
+                    value={this.state.valor}
+                    onChangeText={(valor) => this.setState({ valor })}
+                    placeholder="Valor da receita"
                 />
 
-                <TextInput 
-                        style={styles.desc}                        
-                        value={this.state.descricao}
-                        onChangeText={ (descricao) => this.setState({descricao}) }
-                        placeholder="Descreva ao que se refere"
+                <TextInput
+                    style={styles.desc}
+                    value={this.state.descricao}
+                    onChangeText={(descricao) => this.setState({ descricao })}
+                    placeholder="Descreva ao que se refere"
                 />
                 <View style={styles.areaBtn}>
                     <TouchableOpacity style={styles.btnAdd} onPress={this.adicionar}>
@@ -97,9 +97,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    input:{
+    input: {
         height: 50,
-        backgroundColor: '#0093a3',
+        backgroundColor: '#02a31a',
         marginTop: 20,
         padding: 5,
         fontSize: 25,
@@ -107,9 +107,9 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
 
-    desc:{
+    desc: {
         height: 50,
-        backgroundColor: '#0093a3',
+        backgroundColor: '#02a31a',
         marginTop: 30,
         textAlign: 'center',
         padding: 5,
@@ -121,18 +121,19 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    btnAdd:{
+    btnAdd: {
         height: 50,
         width: 200,
-        backgroundColor: '#ffbf00',
+        backgroundColor: '#026e12',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 30,
         borderRadius: 25
     },
 
-    txtAdd:{
+    txtAdd: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#fff'
     }
 })
