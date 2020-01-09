@@ -23,7 +23,6 @@ export default class Preload extends Component {
         //verificando se há usuário logado
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                //this.props.navigation.navigate('Interna');
                 //fazendo o usuário sair do app caso clique no btn 'voltar'
                 this.props.navigation.dispatch(StackActions.reset({
                     index: 0,
@@ -32,7 +31,6 @@ export default class Preload extends Component {
                     ]
                 }));
             } else {
-                //this.props.navigation.navigate('Home');
                 this.props.navigation.dispatch(StackActions.reset({
                     index: 0,
                     actions: [
