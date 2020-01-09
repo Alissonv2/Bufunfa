@@ -102,7 +102,8 @@ export default class Interna extends Component {
 
           <View style={styles.logout}>
             <TouchableOpacity onPress={this.logout}>
-              <Image source={require('../assets/img/sair.png')} style={{ width: 25, height: 30, marginLeft: 7 }} />
+              <Image source={ require('../assets/img/sair.png') } style={ { width: 20, height: 25, marginLeft: 7 } } />
+              <Text style={styles.sair}>Sair</Text>
             </TouchableOpacity>
           </View>
 
@@ -114,7 +115,7 @@ export default class Interna extends Component {
               <Text style={styles.txtBtn} >+ Receita</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.btn, { borderColor: 'red' }]} onPress={this.despesas}>
+            <TouchableOpacity style={ styles.btn } onPress={this.despesas}>
               <Text style={styles.txtBtn} >+ Despesas</Text>
             </TouchableOpacity>
 
@@ -144,8 +145,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#02a31a'
   },
   logout: {
+    alignItems: 'center',
     height: 40,
-    width: 40
+    width: 30
+  },
+  sair: {
+    color: '#fff',
+    marginLeft: 5
   },
   saldo: {
     fontSize: 28,
