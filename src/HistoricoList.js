@@ -48,12 +48,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingTop: 5,
-        margin: 5,
+        marginHorizontal: 5,
+        marginTop: 15,
         borderBottomWidth: 2,
         borderRadius: 10
     },
 
     texto: {
-        fontSize: 22
+        fontSize: 18
     }
 })
