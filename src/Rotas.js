@@ -1,5 +1,4 @@
 import Home from './Home';
-import Login from './Login';
 import Cadastro from './Cadastro';
 import Interna from './Interna';
 import Preload from './Preload';
@@ -20,10 +19,6 @@ const Navegador = createStackNavigator({
     
     Home: {
         screen: Home,
-    },
-
-    Login: {
-        screen: Login,
     },
 
     Cadastro: {
