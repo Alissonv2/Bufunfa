@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
 
     loading: {
         fontSize: 22,
-        color: '#292929',
+        fontWeight: 'bold',
+        color: '#fff',
         marginTop: 10
     }
 
