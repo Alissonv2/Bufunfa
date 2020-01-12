@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,7 +6,8 @@ import {
   Image,
   TouchableHighlight,
   Text,
-  TextInput
+  TextInput,
+  Animated
 } from 'react-native';
 
 import firebase from './Firebase';
@@ -15,6 +16,7 @@ export default class Home extends Component {
   static navigationOptions = {
     header: null
   };
+
 
   constructor (props) {
     super(props);
@@ -59,7 +61,7 @@ export default class Home extends Component {
     return (
       <ImageBackground source={ require('../assets/img/bg/bg.png') } style={ styles.bg }>
 
-        <View style={ styles.container }>
+        <Animated.View style={ styles.container }>
           <Image source={ require('../assets/img/logo/logo.png') } style={ styles.logo } />
           <View style={ styles.containerEntrar } >
 
@@ -83,7 +85,7 @@ export default class Home extends Component {
               <Text style={ styles.txtCadastro }>Não tem uma conta? Cadastre-se</Text>
             </TouchableHighlight>
           </View>
-        </View>
+        </Animated.View>
       </ImageBackground>
     );
   }
@@ -99,18 +101,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   logo: {
     height: 200,
-    width: 200
+    width: 200,
+    marginBottom: 20
   },
 
   containerEntrar: {
-    flex: 1,
     justifyContent: 'center',
-
+    paddingBottom: 100
   },
 
   txtInput: {
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
   btnEntrar: {
     backgroundColor: '#ffbf00',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
     justifyContent: 'center',
     width: 300,
     height: 50,
@@ -143,7 +145,7 @@ const styles = StyleSheet.create({
   },
 
   cadastrar: {
-    marginTop: 30
+    marginTop: 10
   },
 
   txtCadastro: {
